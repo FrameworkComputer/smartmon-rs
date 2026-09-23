@@ -251,6 +251,11 @@ fn package_version() -> String {
 
 /// (short rev, UTC date, UTC time) of the submodule checkout, if it's a git checkout
 fn git_rev(src: &Path) -> Option<(String, String, String)> {
+    // The packaged crate has no .git, without this check git would walk up
+    // and report the revision of whatever repo the crate is built in
+    if !src.join(".git").exists() {
+        return None;
+    }
     let out = Command::new("git")
         .arg("-C")
         .arg(src)
