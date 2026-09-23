@@ -132,7 +132,7 @@ fn os_deps(target: &Target) -> (Vec<&'static str>, Vec<&'static str>) {
         "linux" | "android" => (vec!["os_linux.cpp", "cciss.cpp", "dev_areca.cpp"], vec![]),
         "freebsd" => (
             vec!["os_freebsd.cpp", "cciss.cpp", "dev_areca.cpp"],
-            vec!["cam", "sbuf"],
+            vec!["cam", "sbuf", "usb"],
         ),
         "netbsd" => (vec!["os_netbsd.cpp"], vec!["util"]),
         "openbsd" => (vec!["os_openbsd.cpp"], vec!["util"]),
@@ -147,7 +147,7 @@ fn os_deps(target: &Target) -> (Vec<&'static str>, Vec<&'static str>) {
                 "os_win32/wmiquery.cpp",
                 "os_win32/popen_win32.cpp",
             ],
-            vec!["ole32", "oleaut32", "advapi32"],
+            vec!["ole32", "oleaut32", "advapi32", "user32"],
         ),
         _ => (vec!["os_generic.cpp"], vec![]),
     }
