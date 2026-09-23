@@ -1,4 +1,4 @@
-# smartmon-sys
+# smartmon
 
 Rust bindings for libsmartmon, [smartmontools](https://www.smartmontools.org/)
 built as a library.

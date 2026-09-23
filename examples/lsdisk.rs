@@ -1,7 +1,7 @@
 //! List model, serial and firmware version of all disks (needs root)
 
 fn main() {
-    match smartmon_sys::scan_disks() {
+    match smartmon::scan_disks() {
         Ok(disks) => {
             for d in disks {
                 println!(

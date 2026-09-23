@@ -1,9 +1,12 @@
 [package]
-name = "smartmon-sys"
+name = "smartmon"
 version = "0.1.0"
 description = "Rust bindings for libsmartmon (smartmontools built as a library)"
 license = "GPL-2.0-or-later"
-repository = "https://github.com/FrameworkComputer/smartmontools-sys"
+repository = "https://github.com/FrameworkComputer/smartmon-rs"
+readme = "README.md"
+keywords = ["smartmontools", "smart", "nvme", "ata", "disk"]
+categories = ["external-ffi-bindings", "hardware-support", "os"]
 edition = "2021"
 rust-version = "1.81"
 links = "smartmon"
@@ -21,3 +24,7 @@ include = [
 
 [build-dependencies]
 cc = "1"
+
+# The C++ sources can't be cross-compiled on docs.rs, the API is the same everywhere
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
