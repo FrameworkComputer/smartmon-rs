@@ -3,6 +3,7 @@
 
 #include <smartmon/dev_interface.h>
 #include <smartmon/atacmds.h>
+#include <smartmon/knowndrives.h>
 #include <smartmon/nvmecmds.h>
 #include <smartmon/scsicmds.h>
 #include <smartmon/utility.h>
@@ -90,11 +91,14 @@ static bool identify(std::unique_ptr<smartmon::smart_device> & dev, smartmon_dis
 extern "C" int smartmon_scan(smartmon_disk * out, int max)
 {
   try {
-    static bool initialized = false;
-    if (!initialized) {
+    static const bool initialized = [] {
       smartmon::smart_interface::init();
-      initialized = true;
-    }
+      // Needed to detect USB bridges by their USB ID, like smartctl does.
+      // Without it, NVMe drives behind USB bridges aren't found.
+      return smartmon::init_drive_database(true);
+    }();
+    if (!initialized)
+      return -1;
 
     smartmon::smart_device_list devs{};
     if (!smartmon::smi()->scan_smart_devices(devs, smartmon::smart_devtype_list{}))
