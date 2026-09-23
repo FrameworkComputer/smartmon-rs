@@ -1,0 +1,23 @@
+[package]
+name = "smartmon-sys"
+version = "0.1.0"
+description = "Rust bindings for libsmartmon (smartmontools built as a library)"
+license = "GPL-2.0-or-later"
+repository = "https://github.com/FrameworkComputer/smartmontools-sys"
+edition = "2021"
+rust-version = "1.81"
+links = "smartmon"
+include = [
+    "/build.rs",
+    "/src",
+    "/examples",
+    "/README.md",
+    "/smartmontools/COPYING",
+    "/smartmontools/configure.ac",
+    "/smartmontools/drivedb/drivedb.h",
+    "/smartmontools/include",
+    "/smartmontools/lib",
+]
+
+[build-dependencies]
+cc = "1"
